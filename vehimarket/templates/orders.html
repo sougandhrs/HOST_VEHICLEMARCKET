@@ -1,0 +1,53 @@
+{% extends "nav.html" %}
+{% load static %}
+{% block content %}
+<style>
+    /* Add your CSS styles here */
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f2f2f2;
+        color: #333;
+    }
+    .orders-container {
+        max-width: 800px;
+        margin: 20px auto;
+        padding: 20px;
+        background-color: #fff;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        border-radius: 5px;
+    }
+    .order {
+        margin-bottom: 20px;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: #f9f9f9;
+    }
+    h1, h2 {
+        color: #007bff;
+    }
+    ul {
+        list-style-type: none;
+        padding: 0;
+    }
+    li {
+        margin-bottom: 5px;
+    }
+</style>
+<h1 style="color: #007bff; font-size: 32px; text-align: center; margin-bottom: 20px; font-family: 'Arial', sans-serif; font-weight: bold;"><span style="font-weight: 800;">Your Orders</span></h1>
+<div class="orders-container">
+    {% for order in orders %}
+    <div class="order">
+        <h2>Order ID: {{ order.id }}</h2>
+        <p>Date: {{ order.payment_datetime }}</p>
+        <p>Status: {{ order.payment_status }}</p>
+        <ul>
+            {% for item in order.orderitem_set.all %}
+            <li>{{ item.accessory.accessory_name }} - Quantity: {{ item.quantity }} - Warranty: {{ item.accessory.warranty }} months</li>
+            {% endfor %}
+        </ul>
+        <a href="{% url 'download_pdf' order.id %}" class="btn btn-primary">Download PDF</a> <!-- Add this line -->
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

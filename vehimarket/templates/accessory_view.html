@@ -1,0 +1,336 @@
+{% extends "nav.html" %}
+{% load static %}
+{% block content %}
+
+<div class="page-heading">
+    <div class="breadcrumbs">
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-12">
+            <ul>
+              <li class="home"> <a href="index-2.html" title="Go to Home Page">Home</a> <span>&rsaquo; </span> </li>
+              <li class="category1599"> <a href="grid.html" title="">New Car</a> <span>&rsaquo; </span> </li>
+              <li class="category1600"> <a href="grid.html" title="">Audi</a> <span>&rsaquo; </span> </li>
+              <li class="category1601"> <strong>Sedans</strong> </li>
+            </ul>
+          </div>
+          <!--col-xs-12--> 
+        </div>
+        <!--row--> 
+      </div>
+      <!--container--> 
+    </div>
+    <div class="page-title">
+      <h2>PRODUCT LISTING</h2>
+    </div>
+  </div>
+  <!--breadcrumbs--> 
+  <!-- BEGIN Main Container col2-left -->
+  <section class="main-container col2-left-layout bounceInUp animated"> 
+    <!-- For version 1, 2, 3, 8 --> 
+    <!-- For version 1, 2, 3 -->
+    <div class="container">
+      <div class="row">
+        <div class="col-main col-sm-9 col-sm-push-3 product-grid">
+        <div class="pro-coloumn">
+          <article class="col-main">
+            <div class="toolbar">
+              <div class="sorter">
+                <div class="view-mode"> <span title="Grid" class="button button-active button-grid">&nbsp;</span><a href="list.html" title="List" class="button-list">&nbsp;</a> </div>
+              </div>
+              <div id="sort-by">
+                <label class="left">Sort By: </label>
+                <ul>
+                  <li><a href="#">Position<span class="right-arrow"></span></a>
+                    <ul>
+                      <li><a href="#">Name</a></li>
+                      <li><a href="#">Price</a></li>
+                      <li><a href="#">Position</a></li>
+                    </ul>
+                  </li>
+                </ul>
+                <a class="button-asc left" href="#" title="Set Descending Direction"><span class="top_arrow"></span></a> </div>
+              <div class="pager">
+                <div id="limiter">
+                  <label>View: </label>
+                  <ul>
+                    <li><a href="#">15<span class="right-arrow"></span></a>
+                      <ul>
+                        <li><a href="#">20</a></li>
+                        <li><a href="#">30</a></li>
+                        <li><a href="#">35</a></li>
+                      </ul>
+                    </li>
+                  </ul>
+                </div>
+                <div class="pages">
+                  <label>Page:</label>
+                  <ul class="pagination">
+                    <li><a href="#">&laquo;</a></li>
+                    <li class="active"><a href="#">1</a></li>
+                    <li><a href="#">2</a></li>
+                    <li><a href="#">3</a></li>
+                    <li><a href="#">4</a></li>
+                    <li><a href="#">5</a></li>
+                    <li><a href="#">&raquo;</a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="category-products">
+              <ol class="products-list" id="products-list">
+            {% for accessory in accessories %}
+            <li class="item first">
+              <div class="product-image"> <a href="product-detail.html" title="{{ accessory.accessory_name }}"> <img class="small-image" src="{{ accessory.images.first.image1.url }}" alt="{{ accessory.accessory_name }}"> </a> </div>
+              <div class="product-shop">
+                <h2 class="product-name"><a href="{% url 'accessories_detail' accessory.id %}" title="{{ accessory.accessory_name }}">{{ accessory.accessory_name }}</a></h2>
+                <div class="ratings">
+                  <div class="rating-box">
+                    <div style="width:50%" class="rating"></div>
+                  </div>
+                  <p class="rating-links"> <a href="#/review/product/list/id/167/category/35/">1 Review(s)</a> <span class="separator">|</span> <a href="#review-form">Add Your Review</a> </p>
+                </div>
+                <div class="desc std">
+                  <p>{{ accessory.description }}</p>
+                </div>
+                <div class="price-box">
+                  {% comment %} <p class="old-price"> <span class="price-label"></span> <span class="price">${{ accessory.price }}</span> </p> {% endcomment %}
+                  {% comment %} <p class="old-price"> <span class="price-label"></span> <span id="old-price-212" class="price"> $442.99 </span> </p> {% endcomment %}
+                  <p class="special-price"> <span class="price-label"></span> <span id="product-price-212" class="price"> ${{ accessory.price }}</span> </p>
+                </div>
+                <div class="actions">
+                  <button onclick="addToCart({{ accessory.id }})" class="button btn-cart ajx-cart" title="Add to Cart" type="button"><span>Add to Cart</span></button>
+                  <span class="add-to-links"> <a title="Add to Wishlist" class="button link-wishlist" href="{% url 'add_to_wishlist' accessory.id %}"><span>Add to Wishlist</span></a> <a title="Add to Compare" class="button link-compare" href="#"><span>Add to Compare</span></a> </span> </div>
+              </div>
+            </li>
+            {% endfor %}
+          </ol>
+            </div>
+            <div class="toolbar bottom">
+              
+              <div id="sort-by">
+                <label class="left">Sort By: </label>
+                <ul>
+                  <li><a href="#">Position<span class="right-arrow"></span></a>
+                    <ul>
+                      <li><a href="#">Name</a></li>
+                      <li><a href="#">Price</a></li>
+                      <li><a href="#">Position</a></li>
+                    </ul>
+                  </li>
+                </ul>
+                <a class="button-asc left" href="#" title="Set Descending Direction"><span class="top_arrow"></span></a> </div>
+              <div class="pager">
+                <div id="limiter">
+                  <label>View: </label>
+                  <ul>
+                    <li><a href="#">15<span class="right-arrow"></span></a>
+                      <ul>
+                        <li><a href="#">20</a></li>
+                        <li><a href="#">30</a></li>
+                        <li><a href="#">35</a></li>
+                      </ul>
+                    </li>
+                  </ul>
+                </div>
+                <div class="pages">
+                  <label>Page:</label>
+                  <ul class="pagination">
+                    <li><a href="#">&laquo;</a></li>
+                    <li class="active"><a href="#">1</a></li>
+                    <li><a href="#">2</a></li>
+                    <li><a href="#">3</a></li>
+                    <li><a href="#">4</a></li>
+                    <li><a href="#">5</a></li>
+                    <li><a href="#">&raquo;</a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            
+          </article>
+          </div>
+          <!--	///*///======    End article  ========= //*/// --> 
+        </div>
+        <aside class="col-left sidebar col-sm-3 col-xs-12 col-sm-pull-9 wow bounceInUp animated"> 
+        
+           <!-- BEGIN SIDE-NAV-CATEGORY -->
+          <div class="side-nav-categories">
+            <div class="block-title"> Categories </div>
+            <!--block-title--> 
+            <!-- BEGIN BOX-CATEGORY -->
+            <div class="box-content box-category">
+              <ul>
+                <li> <a class="active" href="grid.html">AUDIO</a> <span class="subDropdown minus"></span>
+                  <ul class="level0_415" style="display:block">
+                    <li> <a href="grid.html"> Amplifiers </a> <span class=""></span>
+                      
+                      <!--level1--> 
+                    </li>
+                    <!--level1-->
+                    <li> <a href="grid.html"> Installation Parts‎ </a> <span class=""></span>
+                      
+                      <!--level1--> 
+                    </li>
+                    <!--level1-->
+                    <li> <a href="grid.html"> Speakers </a> <span class=""></span>
+                      
+                      <!--level1--> 
+                    </li>
+                    <!--level1-->
+                    <li> <a href="grid.html">Stereos </a> <span class=""></span>
+                    <li> <a href="grid.html">Subwoofers </a> <span class=""></span></li>
+                      
+                      <!--level1--> 
+                    </li>                   
+                  </ul>
+                  <!--level0--> 
+              
+                </li>
+                <!--level 0-->
+                <li> <a href="grid.html">BODY PARTS</a> <span class="subDropdown plus"></span>
+                  <ul class="level0_455" style="display:none">
+                    <li> <a href="grid.html"> Bumpers </a> <span class=""></span>
+                      
+                      <!--level1--> 
+                    </li>
+                    <!--level1-->
+                    <li> <a href="grid.html"> Doors  </a> <span class=""></span>
+                      
+                      <!--level1--> 
+                    </li>
+                    <!--level1-->
+                    <li> <a href="grid.html"> Fenders </a> <span class=""></span>
+                      
+                      <!--level1--> 
+                    </li>
+                    <!--level1-->
+                    <li> <a href="grid.html"> Griles </a> <span class=""></span>
+                      
+                      <!--level1--> 
+                    </li>
+                    <!--level1-->
+                    <li> <a href="grid.html">Hoods </a> <span class=""></span>
+                      
+                      <!--level1--> 
+                    </li>
+                    <!--level1-->
+                    
+                      <!--level1--> 
+                    </li>
+  
+                  </ul>
+                  <!--level0--> 
+                </li>
+                <!--level 0-->
+                <li> <a href="#.html">EXTERIOR</a> <span class="subDropdown plus"></span>
+                  <ul class="level0_482" style="display:none">
+                    <li> <a href="grid.html"> Bed Accessories </a> <span class=""></span>
+                      
+                      <!--level1--> 
+                    </li>
+                    <!--level1-->
+                    <li> <a href="grid.html">Body Kits </a> <span class=""></span>
+                      
+                      <!--level1--> 
+                    </li>
+                    <!--level1-->
+                    <li> <a href="grid.html">Custom Griles </a> <span class=""></span>
+                      
+                      <!--level1--> 
+                    </li>
+                    <!--level1-->
+                    <li> <a href="grid.html"> Car Covers </a> <span class=""></span>
+                      
+                      <!--level1--> 
+                    </li>
+                    <!--level1-->
+                   <li> <a href="grid.html"> Off-Road Bumpers</a> <span class=""></span>
+                      
+                      <!--level1--> 
+                    </li>
+                    <!--level1-->
+                   
+                    </li>
+                    <!--level1-->  
+                  </ul>
+                  <!--level0--> 
+                </li>
+                <!--level 0-->
+                <li> <a href="grid.html">INTERIOR</a> <span class="subDropdown plus"></span>
+                <ul class="level0_482" style="display:none">
+                    <li> <a href="grid.html"> Custom Gauges </a> <span class=""></span></li>
+                    <li> <a href="grid.html"> Dash Kits </a> <span class=""></span></li>
+                    <li> <a href="grid.html"> Seat Covers </a> <span class=""></span></li>
+                    <li> <a href="grid.html"> Steering Wheels </a> <span class=""></span></li>
+                    <li> <a href="grid.html"> Sun Shades</a> <span class=""></span></li>
+                    </li>
+                <!--level 0-->     
+                
+              </ul>
+              <!--level 0-->
+              <li> <a href="grid.html">LIGHTING</a> <span class="subDropdown plus"></span>
+                <ul class="level0_482" style="display:none">
+                    <li> <a href="grid.html"> Fog Lights </a> <span class=""></span></li>
+                    <li> <a href="grid.html"> Headlights </a> <span class=""></span></li>
+                    <li> <a href="grid.html"> LED Lights </a> <span class=""></span></li>
+                    <li> <a href="grid.html">Off-Road Lights </a> <span class=""></span></li>
+                    <li> <a href="grid.html"> Signal Lights</a> <span class=""></span></li>
+                    </li>
+                <!--level 0-->     
+                
+              </ul>
+              <!--level 0-->
+              <li> <a href="grid.html">PERFORMANCE</a> <span class="subDropdown plus"></span>
+                <ul class="level0_482" style="display:none">
+                    <li> <a href="grid.html"> Air Intake Systems </a> <span class=""></span></li>
+                    <li> <a href="grid.html"> Brakes </a> <span class=""></span></li>
+                    <li> <a href="grid.html"> Exhaust Systems </a> <span class=""></span></li>
+                    <li> <a href="grid.html">Power Adders </a> <span class=""></span></li>
+                    <li> <a href="grid.html"> Racing Gear</a> <span class=""></span></li>
+                    </li>
+                <!--level 0-->     
+                
+              </ul>
+            </div>
+            <!--box-content box-category--> 
+          </div>
+          <!--side-nav-categories-->
+          
+
+      <!--row--> 
+    </div>
+    <!--container--> 
+  </section>
+  <!--main-container col2-left-layout--> 
+
+  <script>
+    function addToCart(accessoryId) {
+        var url = `/add-to-cart/${accessoryId}/`;
+
+        var formData = new FormData();
+        formData.append('csrfmiddlewaretoken', '{{ csrf_token }}');  // Include the CSRF token
+
+        fetch(url, {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'X-CSRFToken': '{{ csrf_token }}'  // Also include CSRF token in headers
+            }
+        })
+        .then(response => {
+            if (response.ok) {
+                // Handle success, e.g., redirect to the cart page
+                window.location.href = '{% url "cart" %}';
+            } else {
+                // Handle error
+                console.error('Error adding item to cart:', response.statusText);
+            }
+        })
+        .catch(error => {
+            console.error('Fetch error:', error);
+        });
+    }
+</script>
+
+{% endblock %}
